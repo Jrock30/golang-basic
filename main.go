@@ -19,8 +19,18 @@ func multiply(a, b int) int { // 두개의 타입이 같으면 뒤에 하나만 
 }
 
 // GO Lang 은 여러개의 Return 값을 가질 수 있다.
-func leAndUpper(name string) (int, string) {
+func lenAndUpper(name string) (int, string) {
 	return len(name), strings.ToUpper(name)
+}
+
+// 리턴 값을 초기화 하고 그 값을 수정후 자동 리턴 (naked return) return 을 굳이 명시하지 않아도 됨. 가독성이 좋지 않을 수 있다.
+func lenAndUpper2(name string) (length int, uppercase string) {
+	// function 의 실행이 끝나고 defer 가 실행된다.
+	defer fmt.Println("I'm done")
+	fmt.Println("===TEST 이게 위의 defer 보다 먼저 실행===")
+	length = len(name)
+	uppercase = strings.ToUpper(name)
+	return
 }
 
 // 여러개의 아규먼트를 받는 방법
@@ -65,9 +75,13 @@ func part1() {
 	// 여러개 다른 타입을 리턴하는 함수
 	//totalLength, upperName := leAndUpper("jrock")
 	// 두번째 값을 무시하려면 생략이 아닌 _ 로 작성해야한다.
-	totalLength, _ := leAndUpper("jrock")
+	totalLength, _ := lenAndUpper("jrock")
 	//fmt.Println(totalLength, upperName)
 	fmt.Println(totalLength)
+
+	// naked return
+	length, uppercase := lenAndUpper2("jrock")
+	fmt.Println(length, uppercase)
 
 	// 여러개의 아규먼트
 	repeatMe("jung", "hong", "kim", "park")
@@ -172,9 +186,9 @@ func main() {
 	// const, var, func
 	part1()
 	// array
-	part2()
+	//part2()
 	// pointer
-	part3()
+	//part3()
 	// struct
-	part4()
+	//part4()
 }
