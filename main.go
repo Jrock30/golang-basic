@@ -8,7 +8,9 @@ main.go 는 프로젝트를 컴파일 하고 싶다면 만든다 (진입점, ent
 package main
 
 import (
+	"fmt"
 	"github.com/jrock30/learngo/basic"
+	"github.com/jrock30/learngo/person"
 )
 
 /**
@@ -18,4 +20,10 @@ main function
 func main() {
 	basic.Init()
 
+	jrock := person.Person{}
+	jrock.SetDetails("jrock", 20)
+	// 여기서는 작동하지 않는다 set 한 데이터가. 이 것은 main 함수에 있는 jrock 객체
+	// 즉 위의 객체는 복사가 되어 설정이 된다. 그래서 SetDetails 에서 객체를 *Person 포인터를 주어야한다.
+	fmt.Println("Main Jrock", jrock)
+	fmt.Println(">>> ", jrock.Name())
 }
