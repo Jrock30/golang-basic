@@ -9,8 +9,10 @@ package main
 
 import (
 	"fmt"
+	"github.com/jrock30/learngo/accounts"
 	"github.com/jrock30/learngo/basic"
 	"github.com/jrock30/learngo/person"
+	"log"
 )
 
 /**
@@ -26,4 +28,16 @@ func main() {
 	// 즉 위의 객체는 복사가 되어 설정이 된다. 그래서 SetDetails 에서 객체를 *Person 포인터를 주어야한다.
 	fmt.Println("Main Jrock", jrock)
 	fmt.Println(">>> ", jrock.Name())
+
+	account := accounts.NewAccount("jrock")
+	fmt.Println(account)
+
+	account.Deposit(10)
+	fmt.Println(account.Balance())
+	err := account.Withdrew(30)
+	// 이렇게 하면 에러메세지가 발생한다.
+	if err != nil {
+		log.Fatalln(err)
+	}
+	fmt.Println(account.Balance())
 }
